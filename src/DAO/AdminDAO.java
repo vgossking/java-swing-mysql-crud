@@ -22,7 +22,7 @@ public class AdminDAO {
     public static ResultSet rs;
     public Admin CheckLogin(String username, String password){
         Admin ad = null;
-        String sql = "SELECT COUNT(*)  FROM tbladmin where username =? and password =?";
+        String sql = "SELECT * FROM tbladmin where username =? and password =?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, username);
