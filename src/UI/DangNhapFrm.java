@@ -118,16 +118,19 @@ public class DangNhapFrm extends javax.swing.JFrame {
         AdminDAO dao =  new AdminDAO();
         String username = jTextField1.getText();
         String password = jTextField2.getText();
-        Admin ad = dao.CheckLogin(username, password);
-        if(ad != null){
-            this.dispose();
-            JOptionPane.showMessageDialog(null, "hello " +username);
-            new MenuFrm().setVisible(true);
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "log in fail");
-        }
-     
+        if(username.equals("") || password.equals("")){
+            JOptionPane.showMessageDialog(null, "hay nhap du user va pass");
+        }else{
+            Admin ad = dao.CheckLogin(username, password);
+            if(ad != null){
+                this.dispose();
+                JOptionPane.showMessageDialog(null, "hello " +username);
+                new MenuFrm().setVisible(true);
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "log in fail");
+            }    
+        }       
     }//GEN-LAST:event_LoginActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
