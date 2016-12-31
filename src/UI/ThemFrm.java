@@ -112,8 +112,9 @@ public class ThemFrm extends javax.swing.JFrame {
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(txtTenPhim, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(1, 1, 1)
                                     .addComponent(jLabel2)
-                                    .addGap(11, 11, 11)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(txtDaoDien)))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
@@ -194,21 +195,26 @@ public class ThemFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDaoDienActionPerformed
 
     private void btnThemPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThemPhimActionPerformed
-         Phim phim = new Phim();
-         phim.setName(txtTenPhim.getText());
-         phim.setDirector(txtDaoDien.getText());
-         phim.setCountry(txtQuocGia.getText());
-         phim.setGenre(cbTheLoai.getSelectedItem().toString());
-         phim.setNamSanXuat(Integer.parseInt(txtNamSanXuat.getText()));
-         phim.setDescription(taNoiDung.getText());
-         phim.setActor(txtDienVien.getText());
-         PhimDAO dao = new PhimDAO();
-         if(dao.checkTenPhim(txtTenPhim.getText())){
-             JOptionPane.showMessageDialog(null, "Da co phim nay trong csdl");
-         }else{
-            dao.ThemPhim(phim);
-            JOptionPane.showMessageDialog(null, "Them phim "+txtTenPhim.getText()+" thanh cong");
-          }
+         if(txtTenPhim.getText().equals("")){
+             JOptionPane.showMessageDialog(null, "Moi ban nhap ten phim");
+         }
+         else{
+            Phim phim = new Phim();
+            phim.setName(txtTenPhim.getText());
+            phim.setDirector(txtDaoDien.getText());
+            phim.setCountry(txtQuocGia.getText());
+            phim.setGenre(cbTheLoai.getSelectedItem().toString());
+            phim.setNamSanXuat(Integer.parseInt(txtNamSanXuat.getText()));
+            phim.setDescription(taNoiDung.getText());
+            phim.setActor(txtDienVien.getText());
+            PhimDAO dao = new PhimDAO();
+            if(dao.checkTenPhim(txtTenPhim.getText())){
+                JOptionPane.showMessageDialog(null, "Da co phim nay trong csdl");
+            }else{
+               dao.ThemPhim(phim);
+               JOptionPane.showMessageDialog(null, "Them phim "+txtTenPhim.getText()+" thanh cong");
+            }
+         }       
     }//GEN-LAST:event_btnThemPhimActionPerformed
 
     private void cbTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTheLoaiActionPerformed

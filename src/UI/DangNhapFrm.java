@@ -124,7 +124,7 @@ public class DangNhapFrm extends javax.swing.JFrame {
             Admin ad = dao.CheckLogin(username, password);
             if(ad != null){
                 this.dispose();
-                JOptionPane.showMessageDialog(null, "hello " +username);
+                JOptionPane.showMessageDialog(null, "hello " + ad.getUsername());
                 new MenuFrm().setVisible(true);
             }
             else{

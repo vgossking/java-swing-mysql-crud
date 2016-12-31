@@ -29,7 +29,9 @@ public class AdminDAO {
             ps.setString(2, password);
             rs = ps.executeQuery();
             if(rs.next()){
-               ad = new Admin(); 
+               int Id =rs.getInt("id");
+               String address = rs.getString("address");
+               ad = new Admin(Id, username, password, address); 
             }
         } catch (SQLException ex) {
            return ad = null;

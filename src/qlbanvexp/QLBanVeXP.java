@@ -4,7 +4,6 @@
  * and open the template in the editor.
  */
 package qlbanvexp;
-import DAO.DataConnect;
 import UI.DangNhapFrm;
 
 /**
