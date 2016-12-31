@@ -5,6 +5,12 @@
  */
 package UI;
 
+import DAO.PhimDAO;
+import Model.Phim;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author ColaCola
@@ -17,7 +23,9 @@ public class QLPhimFrm extends javax.swing.JFrame {
     public QLPhimFrm() {
         initComponents();
     }
-
+    private Object[][] tableData = {};
+    final String[] collumnNames ={"ID","ten phim", "ten dien vien", "the loai", "nam san xuat", "dao dien","noi dung","quoc gia"}; 
+    DefaultTableModel tableModel = new DefaultTableModel(tableData, collumnNames);
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -75,14 +83,6 @@ public class QLPhimFrm extends javax.swing.JFrame {
             }
         });
 
-        tblResult.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID", "Ten Phim", "Ten Dao Dien", "The Loai", "Noi Dung"
-            }
-        ));
         jScrollPane1.setViewportView(tblResult);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -135,7 +135,7 @@ public class QLPhimFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        // TODO add your handling code here:
+        int index = tblResult.getSelectedRow();
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
@@ -148,11 +148,25 @@ public class QLPhimFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        // TODO add your handling code here:
+       new SuaPhimFrm().setVisible(true);
     }//GEN-LAST:event_btnSuaActionPerformed
-
+    
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
-        // TODO add your handling code here:
+        PhimDAO dao = new PhimDAO();
+        List<Phim> listPhim = dao.timPhim(txtTimKiem.getText());
+        if(listPhim.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ko tim thay ket qua");
+        }
+        else{
+            int soPhim = listPhim.size();
+            Object[] tableData = new Object[soPhim];
+            for(int i = 0; i < soPhim; i++){
+               Phim phim = listPhim.get(i);
+               tableData = new Object[]{phim.getId(),phim.getName(), phim.getActor(),phim.getGenre(),phim.getNamSanXuat(), phim.getDirector(),phim.getDescription(), phim.getCountry()};
+               this.tableModel.addRow(tableData);
+           }          
+           tblResult.setModel(tableModel);
+        }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
     /**

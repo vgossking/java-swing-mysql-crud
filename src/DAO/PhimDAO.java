@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,6 +43,10 @@ public class PhimDAO {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }                
     }
+    /*
+    Method check ten phim
+    @param ten phim
+    */
     public boolean checkTenPhim(String tenPhim){
         PreparedStatement ps1;
         ResultSet rs1;
@@ -56,5 +62,31 @@ public class PhimDAO {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+    public List<Phim> timPhim(String tenPhim){
+        PreparedStatement ps;
+        ResultSet rs;
+        List<Phim> listPhim = new ArrayList<Phim>();
+        String sql ="SELECT * FROM tblphim WHERE tenphim LIKE '%"+tenPhim+"%'";
+        try {
+            ps = conn.prepareStatement(sql);
+           // ps.setString(1, tenPhim);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                int id =rs.getInt("id");
+                String ten = rs.getString("tenphim");
+                String daoDien = rs.getString("daodien");
+                String noiDung = rs.getString("noidung");
+                String theLoai = rs.getString("theloai");
+                String dienVien = rs.getString("dienvien");
+                int namSanXuat = rs.getInt("namsanxuat");
+                String quocGia = rs.getString("quocGia");
+                listPhim.add(new Phim(id, ten, dienVien, theLoai, namSanXuat, daoDien, noiDung, quocGia));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return listPhim;
     }
 }
