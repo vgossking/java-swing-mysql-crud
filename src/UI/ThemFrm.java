@@ -39,7 +39,7 @@ public class ThemFrm extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         btnThemPhim = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
         txtDaoDien = new javax.swing.JTextField();
         cbTheLoai = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -63,14 +63,19 @@ public class ThemFrm extends javax.swing.JFrame {
 
         jLabel7.setText("Quốc gia");
 
-        btnThemPhim.setText("Thêm");
+        btnThemPhim.setText("Them");
         btnThemPhim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemPhimActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Hủy");
+        btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         txtDaoDien.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,7 +146,7 @@ public class ThemFrm extends javax.swing.JFrame {
                         .addGap(155, 155, 155)
                         .addComponent(btnThemPhim)
                         .addGap(110, 110, 110)
-                        .addComponent(jButton2)))
+                        .addComponent(btnReset)))
                 .addGap(28, 121, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -180,7 +185,7 @@ public class ThemFrm extends javax.swing.JFrame {
                     .addComponent(txtQuocGia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
+                    .addComponent(btnReset)
                     .addComponent(btnThemPhim))
                 .addGap(19, 19, 19))
         );
@@ -199,6 +204,7 @@ public class ThemFrm extends javax.swing.JFrame {
              JOptionPane.showMessageDialog(null, "Moi ban nhap ten phim");
          }
          else{
+             //create object
             Phim phim = new Phim();
             phim.setName(txtTenPhim.getText());
             phim.setDirector(txtDaoDien.getText());
@@ -207,12 +213,15 @@ public class ThemFrm extends javax.swing.JFrame {
             phim.setNamSanXuat(Integer.parseInt(txtNamSanXuat.getText()));
             phim.setDescription(taNoiDung.getText());
             phim.setActor(txtDienVien.getText());
+            //call DAO
             PhimDAO dao = new PhimDAO();
             if(dao.checkTenPhim(txtTenPhim.getText())){
                 JOptionPane.showMessageDialog(null, "Da co phim nay trong csdl");
             }else{
                dao.ThemPhim(phim);
                JOptionPane.showMessageDialog(null, "Them phim "+txtTenPhim.getText()+" thanh cong");
+               //reset text
+                btnResetActionPerformed(evt);
             }
          }       
     }//GEN-LAST:event_btnThemPhimActionPerformed
@@ -224,6 +233,15 @@ public class ThemFrm extends javax.swing.JFrame {
     private void txtDienVienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDienVienActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDienVienActionPerformed
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        txtTenPhim.setText("");
+        txtDaoDien.setText("");
+        txtQuocGia.setText("");
+        taNoiDung.setText("");
+        txtDienVien.setText("");
+        txtNamSanXuat.setText("");      
+    }//GEN-LAST:event_btnResetActionPerformed
 
     /**
      * @param args the command line arguments
@@ -261,9 +279,9 @@ public class ThemFrm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThemPhim;
     private javax.swing.JComboBox<String> cbTheLoai;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

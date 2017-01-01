@@ -89,4 +89,16 @@ public class PhimDAO {
         
         return listPhim;
     }
+    public void XoaPhim(int ID){
+        PreparedStatement ps;
+        String sql ="DELETE FROM tblphim WHERE id = ?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, ID);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
 }

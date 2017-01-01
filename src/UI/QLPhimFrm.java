@@ -8,6 +8,7 @@ package UI;
 import DAO.PhimDAO;
 import Model.Phim;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -135,7 +136,17 @@ public class QLPhimFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
+        Vector data = tableModel.getDataVector();
         int index = tblResult.getSelectedRow();
+        Object phimDuocChon = data.get(index);
+        String phim = phimDuocChon.toString();
+        String[] phimSplit = phim.split(",");
+        String phimIDStr = phimSplit[0].substring(1);
+        int phimID = Integer.parseInt(phimIDStr);
+        PhimDAO dao = new PhimDAO();
+        dao.XoaPhim(phimID);
+        tableModel.removeRow(index);
+       JOptionPane.showMessageDialog(null, phimID);
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed
@@ -148,16 +159,18 @@ public class QLPhimFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-       new SuaPhimFrm().setVisible(true);
+       
     }//GEN-LAST:event_btnSuaActionPerformed
     
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
+
         PhimDAO dao = new PhimDAO();
         List<Phim> listPhim = dao.timPhim(txtTimKiem.getText());
         if(listPhim.isEmpty()){
             JOptionPane.showMessageDialog(null, "Ko tim thay ket qua");
         }
         else{
+            this.tableModel.setRowCount(0);
             int soPhim = listPhim.size();
             Object[] tableData = new Object[soPhim];
             for(int i = 0; i < soPhim; i++){

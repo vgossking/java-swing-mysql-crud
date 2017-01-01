@@ -38,7 +38,7 @@ public class SuaPhimFrm extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        btnSua = new javax.swing.JButton();
+        btnSuaPhim = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         txtDaoDien = new javax.swing.JTextField();
         cbTheLoai = new javax.swing.JComboBox<>();
@@ -63,10 +63,10 @@ public class SuaPhimFrm extends javax.swing.JFrame {
 
         jLabel7.setText("Quốc gia");
 
-        btnSua.setText("Sua");
-        btnSua.addActionListener(new java.awt.event.ActionListener() {
+        btnSuaPhim.setText("Sua");
+        btnSuaPhim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSuaActionPerformed(evt);
+                btnSuaPhimActionPerformed(evt);
             }
         });
 
@@ -139,7 +139,7 @@ public class SuaPhimFrm extends javax.swing.JFrame {
                                         .addComponent(txtNamSanXuat))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
-                        .addComponent(btnSua)
+                        .addComponent(btnSuaPhim)
                         .addGap(110, 110, 110)
                         .addComponent(jButton2)))
                 .addGap(28, 121, Short.MAX_VALUE))
@@ -181,7 +181,7 @@ public class SuaPhimFrm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(btnSua))
+                    .addComponent(btnSuaPhim))
                 .addGap(19, 19, 19))
         );
 
@@ -194,9 +194,28 @@ public class SuaPhimFrm extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtDaoDienActionPerformed
 
-    private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-        
-    }//GEN-LAST:event_btnSuaActionPerformed
+    private void btnSuaPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaPhimActionPerformed
+         if(txtTenPhim.getText().equals("")){
+             JOptionPane.showMessageDialog(null, "Moi ban nhap ten phim");
+         }
+         else{
+            Phim phim = new Phim();
+            phim.setName(txtTenPhim.getText());
+            phim.setDirector(txtDaoDien.getText());
+            phim.setCountry(txtQuocGia.getText());
+            phim.setGenre(cbTheLoai.getSelectedItem().toString());
+            phim.setNamSanXuat(Integer.parseInt(txtNamSanXuat.getText()));
+            phim.setDescription(taNoiDung.getText());
+            phim.setActor(txtDienVien.getText());
+            PhimDAO dao = new PhimDAO();
+            if(dao.checkTenPhim(txtTenPhim.getText())){
+                JOptionPane.showMessageDialog(null, "Da co phim nay trong csdl");
+            }else{
+               dao.ThemPhim(phim);
+               JOptionPane.showMessageDialog(null, "Them phim "+txtTenPhim.getText()+" thanh cong");
+            }
+         }       
+    }//GEN-LAST:event_btnSuaPhimActionPerformed
 
     private void cbTheLoaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTheLoaiActionPerformed
         // TODO add your handling code here:
@@ -223,26 +242,27 @@ public class SuaPhimFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaPhimFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaPhimFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaPhimFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaPhimFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThemFrm().setVisible(true);
+                new SuaPhimFrm().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnSua;
+    private javax.swing.JButton btnSuaPhim;
     private javax.swing.JComboBox<String> cbTheLoai;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
