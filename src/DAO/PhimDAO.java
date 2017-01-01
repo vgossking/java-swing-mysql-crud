@@ -89,6 +89,34 @@ public class PhimDAO {
         
         return listPhim;
     }
+    /*
+    Method Sua Phim
+    @Param Object Phim
+    */
+    public void SuaPhim(Phim phim){
+        PreparedStatement ps;
+        String sql = "UPDATE tblphim tenphim =?, daodien =?, dienvien=?, theloai=?, noidung=?, namsanxuat=?,quocgia=? WHERE id =?";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1,phim.getName());
+            ps.setString(2,phim.getDirector());
+            ps.setString(3,phim.getActor());
+            ps.setString(4,phim.getGenre());
+            ps.setString(5, phim.getDescription());
+            ps.setInt(6,phim.getNamSanXuat());
+            ps.setString(7,phim.getCountry());
+            ps.setInt(8, phim.getId());
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+    
+    /*
+    Method xoa phim
+    @param phim ID
+    */
     public void XoaPhim(int ID){
         PreparedStatement ps;
         String sql ="DELETE FROM tblphim WHERE id = ?";

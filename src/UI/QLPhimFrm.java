@@ -136,16 +136,12 @@ public class QLPhimFrm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnXoaActionPerformed
-        Vector data = tableModel.getDataVector();
         int index = tblResult.getSelectedRow();
-        Object phimDuocChon = data.get(index);
-        String phim = phimDuocChon.toString();
-        String[] phimSplit = phim.split(",");
-        String phimIDStr = phimSplit[0].substring(1);
+        String phimIDStr =tblResult.getModel().getValueAt(index, 0).toString();
         int phimID = Integer.parseInt(phimIDStr);
         PhimDAO dao = new PhimDAO();
         dao.XoaPhim(phimID);
-        tableModel.removeRow(index);
+        //tableModel.removeRow(index);
        JOptionPane.showMessageDialog(null, phimID);
     }//GEN-LAST:event_btnXoaActionPerformed
 
