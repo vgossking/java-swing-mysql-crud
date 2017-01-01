@@ -95,7 +95,7 @@ public class PhimDAO {
     */
     public void SuaPhim(Phim phim){
         PreparedStatement ps;
-        String sql = "UPDATE tblphim tenphim =?, daodien =?, dienvien=?, theloai=?, noidung=?, namsanxuat=?,quocgia=? WHERE id =?";
+        String sql = "UPDATE tblphim SET tenphim =?, daodien =?, dienvien=?, theloai=?, noidung=?, namsanxuat=?,quocgia=? WHERE id =?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1,phim.getName());

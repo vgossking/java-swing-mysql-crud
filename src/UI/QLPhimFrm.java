@@ -26,7 +26,12 @@ public class QLPhimFrm extends javax.swing.JFrame {
     }
     private Object[][] tableData = {};
     final String[] collumnNames ={"ID","ten phim", "ten dien vien", "the loai", "nam san xuat", "dao dien","noi dung","quoc gia"}; 
-    DefaultTableModel tableModel = new DefaultTableModel(tableData, collumnNames);
+    DefaultTableModel tableModel = new DefaultTableModel(tableData, collumnNames){
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return column != 0;
+        }
+    };
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -155,7 +160,27 @@ public class QLPhimFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
-       
+       int index = tblResult.getSelectedRow();
+       String phimIDStr =tblResult.getModel().getValueAt(index, 0).toString();
+       int phimID = Integer.parseInt(phimIDStr);
+       String tenPhim = tblResult.getModel().getValueAt(index, 1).toString();
+       String dienVien = tblResult.getModel().getValueAt(index, 2).toString();
+       String theLoai = tblResult.getModel().getValueAt(index, 3).toString();
+       int namSanXuat = Integer.parseInt(tblResult.getModel().getValueAt(index, 4).toString());
+       String daoDien = tblResult.getModel().getValueAt(index, 5).toString();
+       String noiDung = tblResult.getModel().getValueAt(index, 6).toString();
+       String quocGia = tblResult.getModel().getValueAt(index, 7).toString();
+       Phim phim = new Phim();
+       phim.setId(phimID);
+       phim.setActor(dienVien);
+       phim.setCountry(quocGia);
+       phim.setDescription(noiDung);
+       phim.setDirector(daoDien);
+       phim.setGenre(theLoai);
+       phim.setNamSanXuat(namSanXuat);
+       phim.setName(tenPhim);
+       PhimDAO dao = new PhimDAO();
+       dao.SuaPhim(phim);
     }//GEN-LAST:event_btnSuaActionPerformed
     
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
