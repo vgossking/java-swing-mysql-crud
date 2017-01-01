@@ -160,6 +160,7 @@ public class QLPhimFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void btnSuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaActionPerformed
+       /*Get Value from JTable*/
        int index = tblResult.getSelectedRow();
        String phimIDStr =tblResult.getModel().getValueAt(index, 0).toString();
        int phimID = Integer.parseInt(phimIDStr);
@@ -170,6 +171,7 @@ public class QLPhimFrm extends javax.swing.JFrame {
        String daoDien = tblResult.getModel().getValueAt(index, 5).toString();
        String noiDung = tblResult.getModel().getValueAt(index, 6).toString();
        String quocGia = tblResult.getModel().getValueAt(index, 7).toString();
+       //Create Object Phim and set 
        Phim phim = new Phim();
        phim.setId(phimID);
        phim.setActor(dienVien);

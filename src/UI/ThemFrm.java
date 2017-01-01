@@ -48,6 +48,7 @@ public class ThemFrm extends javax.swing.JFrame {
         txtQuocGia = new javax.swing.JTextField();
         txtDienVien = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -102,6 +103,13 @@ public class ThemFrm extends javax.swing.JFrame {
 
         jLabel3.setText("Dien vien");
 
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,7 +153,9 @@ public class ThemFrm extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(155, 155, 155)
                         .addComponent(btnThemPhim)
-                        .addGap(110, 110, 110)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBack)
+                        .addGap(19, 19, 19)
                         .addComponent(btnReset)))
                 .addGap(28, 121, Short.MAX_VALUE))
         );
@@ -186,7 +196,8 @@ public class ThemFrm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnReset)
-                    .addComponent(btnThemPhim))
+                    .addComponent(btnThemPhim)
+                    .addComponent(btnBack))
                 .addGap(19, 19, 19))
         );
 
@@ -243,6 +254,11 @@ public class ThemFrm extends javax.swing.JFrame {
         txtNamSanXuat.setText("");      
     }//GEN-LAST:event_btnResetActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        this.dispose();
+        new QLPhimFrm().setVisible(true);
+    }//GEN-LAST:event_btnBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -279,6 +295,7 @@ public class ThemFrm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnThemPhim;
     private javax.swing.JComboBox<String> cbTheLoai;
