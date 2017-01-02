@@ -91,7 +91,7 @@ public class SuaFrm extends javax.swing.JFrame {
 
         jLabel7.setText("Quốc gia");
 
-        btnThemPhim.setText("Them");
+        btnThemPhim.setText("Sua");
         btnThemPhim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnThemPhimActionPerformed(evt);
@@ -285,8 +285,7 @@ public class SuaFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResetActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        this.dispose();
-        new QLPhimFrm().setVisible(true);
+        this.dispose();       
     }//GEN-LAST:event_btnBackActionPerformed
 
     /**

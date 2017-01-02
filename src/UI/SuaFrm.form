@@ -173,7 +173,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="btnThemPhim">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Them"/>
+        <Property name="text" type="java.lang.String" value="Sua"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnThemPhimActionPerformed"/>
