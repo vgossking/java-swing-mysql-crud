@@ -7,6 +7,7 @@ package UI;
 
 import DAO.PhimDAO;
 import Model.Phim;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,15 +15,40 @@ import javax.swing.JOptionPane;
  * @author ColaCola
  */
 public class SuaFrm extends javax.swing.JFrame {
-
+     private static Phim phimDaChon;
+     
+      public static void setPhimDaChon(Phim _phimDaChon){
+        phimDaChon = _phimDaChon;       
+    }
     /**
      * Creates new form ThemFrm
      */
     public SuaFrm() {
         initComponents();
-        txtTenPhim.setText("hell");
+        txtTenPhim.setText(phimDaChon.getName());
+        txtDaoDien.setText(phimDaChon.getDirector());
+        taNoiDung.setText(phimDaChon.getDescription());
+        txtDienVien.setText(phimDaChon.getActor());
+        txtQuocGia.setText(phimDaChon.getCountry());
+        txtNamSanXuat.setText(Integer.toString(phimDaChon.getNamSanXuat()));
+        setSelectedValue(cbTheLoai, phimDaChon.getGenre());
     }
-
+    
+   public static void setSelectedValue(JComboBox comboBox, String value)
+    {
+        for (int i = 0; i < comboBox.getItemCount(); i++)
+        {
+           Object itemValue = comboBox.getItemAt(i);
+           String itemValString = itemValue.toString();
+            if (itemValue.equals(value))
+            {
+                comboBox.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
+    
+   
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -217,24 +243,23 @@ public class SuaFrm extends javax.swing.JFrame {
          }
          else{
              //create object
-            Phim phim = new Phim();
-            phim.setName(txtTenPhim.getText());
-            phim.setDirector(txtDaoDien.getText());
-            phim.setCountry(txtQuocGia.getText());
-            phim.setGenre(cbTheLoai.getSelectedItem().toString());
-            phim.setNamSanXuat(Integer.parseInt(txtNamSanXuat.getText()));
-            phim.setDescription(taNoiDung.getText());
-            phim.setActor(txtDienVien.getText());
-            //call DAO
-            PhimDAO dao = new PhimDAO();
-            if(dao.checkTenPhim(txtTenPhim.getText())){
-                JOptionPane.showMessageDialog(null, "Da co phim nay trong csdl");
-            }else{
-               dao.ThemPhim(phim);
-               JOptionPane.showMessageDialog(null, "Them phim "+txtTenPhim.getText()+" thanh cong");
-               //reset text
-                btnResetActionPerformed(evt);
-            }
+             Phim phim = new Phim();
+             phim.setName(txtTenPhim.getText());
+             phim.setDirector(txtDaoDien.getText());
+             phim.setCountry(txtQuocGia.getText());
+             phim.setGenre(cbTheLoai.getSelectedItem().toString());
+             phim.setNamSanXuat(Integer.parseInt(txtNamSanXuat.getText()));
+             phim.setDescription(taNoiDung.getText());
+             phim.setActor(txtDienVien.getText());
+             phim.setId(phimDaChon.getId());
+             //call DAO
+             PhimDAO dao = new PhimDAO();
+
+             dao.SuaPhim(phim);
+             JOptionPane.showMessageDialog(null, "Sua phim " + txtTenPhim.getText() + " thanh cong");
+             //reset text
+             btnResetActionPerformed(evt);
+             this.dispose();
          }       
     }//GEN-LAST:event_btnThemPhimActionPerformed
 

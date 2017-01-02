@@ -181,8 +181,10 @@ public class QLPhimFrm extends javax.swing.JFrame {
        phim.setGenre(theLoai);
        phim.setNamSanXuat(namSanXuat);
        phim.setName(tenPhim);
-       PhimDAO dao = new PhimDAO();
-       dao.SuaPhim(phim);
+       //PhimDAO dao = new PhimDAO();
+       //dao.SuaPhim(phim);
+       SuaFrm.setPhimDaChon(phim);
+       new SuaFrm().setVisible(true);
     }//GEN-LAST:event_btnSuaActionPerformed
     
     private void btnTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTimKiemActionPerformed
@@ -247,7 +249,7 @@ public class QLPhimFrm extends javax.swing.JFrame {
     private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblResult;
+    public static javax.swing.JTable tblResult;
     private javax.swing.JTextField txtTimKiem;
     // End of variables declaration//GEN-END:variables
 }
