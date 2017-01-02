@@ -13,13 +13,14 @@ import javax.swing.JOptionPane;
  *
  * @author ColaCola
  */
-public class ThemFrm extends javax.swing.JFrame {
+public class SuaFrm extends javax.swing.JFrame {
 
     /**
      * Creates new form ThemFrm
      */
-    public ThemFrm() {
+    public SuaFrm() {
         initComponents();
+        txtTenPhim.setText("hell");
     }
 
     /**
@@ -221,24 +222,19 @@ public class ThemFrm extends javax.swing.JFrame {
             phim.setDirector(txtDaoDien.getText());
             phim.setCountry(txtQuocGia.getText());
             phim.setGenre(cbTheLoai.getSelectedItem().toString());
-            try{
-                phim.setNamSanXuat(Integer.parseInt(txtNamSanXuat.getText()));
-                phim.setDescription(taNoiDung.getText());
-                phim.setActor(txtDienVien.getText());
-                //call DAO
-                PhimDAO dao = new PhimDAO();
-                if (dao.checkTenPhim(txtTenPhim.getText())) {
-                    JOptionPane.showMessageDialog(null, "Da co phim nay trong csdl");
-                } else {
-                    dao.ThemPhim(phim);
-                    JOptionPane.showMessageDialog(null, "Them phim " + txtTenPhim.getText() + " thanh cong");
-                    //reset text
-                    btnResetActionPerformed(evt);
-                }
-            }catch(NumberFormatException e){
-                JOptionPane.showMessageDialog(null, "Nhap nam ko phu hop");  //check input invalid            
+            phim.setNamSanXuat(Integer.parseInt(txtNamSanXuat.getText()));
+            phim.setDescription(taNoiDung.getText());
+            phim.setActor(txtDienVien.getText());
+            //call DAO
+            PhimDAO dao = new PhimDAO();
+            if(dao.checkTenPhim(txtTenPhim.getText())){
+                JOptionPane.showMessageDialog(null, "Da co phim nay trong csdl");
+            }else{
+               dao.ThemPhim(phim);
+               JOptionPane.showMessageDialog(null, "Them phim "+txtTenPhim.getText()+" thanh cong");
+               //reset text
+                btnResetActionPerformed(evt);
             }
-           
          }       
     }//GEN-LAST:event_btnThemPhimActionPerformed
 
@@ -281,20 +277,21 @@ public class ThemFrm extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ThemFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ThemFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ThemFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ThemFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(SuaFrm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ThemFrm().setVisible(true);
+                new SuaFrm().setVisible(true);
             }
         });
     }

@@ -29,7 +29,7 @@ public class QLPhimFrm extends javax.swing.JFrame {
     DefaultTableModel tableModel = new DefaultTableModel(tableData, collumnNames){
         @Override
         public boolean isCellEditable(int row, int column) {
-            return column != 0;
+            return column != 0; //make the id column not editable
         }
     };
     /**

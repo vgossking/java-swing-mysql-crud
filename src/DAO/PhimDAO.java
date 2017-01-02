@@ -63,6 +63,11 @@ public class PhimDAO {
         }
         return false;
     }
+    /*
+    Method tim phim
+    @param tenphim
+    Return a list of object phim
+    */
     public List<Phim> timPhim(String tenPhim){
         PreparedStatement ps;
         ResultSet rs;
