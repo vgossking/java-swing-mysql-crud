@@ -33,14 +33,14 @@ public class SuaFrm extends javax.swing.JFrame {
         txtNamSanXuat.setText(Integer.toString(phimDaChon.getNamSanXuat()));
         setSelectedValue(cbTheLoai, phimDaChon.getGenre());
     }
-    
+   //Method set value for combobox 
    public static void setSelectedValue(JComboBox comboBox, String value)
     {
         for (int i = 0; i < comboBox.getItemCount(); i++)
         {
            Object itemValue = comboBox.getItemAt(i);
            String itemValString = itemValue.toString();
-            if (itemValue.equals(value))
+            if (itemValString.equals(value))
             {
                 comboBox.setSelectedIndex(i);
                 break;
@@ -253,13 +253,17 @@ public class SuaFrm extends javax.swing.JFrame {
              phim.setActor(txtDienVien.getText());
              phim.setId(phimDaChon.getId());
              //call DAO
+             String tenPhim = txtTenPhim.getText();
              PhimDAO dao = new PhimDAO();
-
-             dao.SuaPhim(phim);
-             JOptionPane.showMessageDialog(null, "Sua phim " + txtTenPhim.getText() + " thanh cong");
-             //reset text
-             btnResetActionPerformed(evt);
-             this.dispose();
+             if(dao.checkTenPhim(tenPhim) && !tenPhim.equals(phimDaChon.getName()) ){
+                 JOptionPane.showMessageDialog(null, "Ten phim da ton tai");
+             }else{
+                 dao.SuaPhim(phim);
+                 JOptionPane.showMessageDialog(null, "Sua phim " + txtTenPhim.getText() + " thanh cong");
+                 //reset text
+                 btnResetActionPerformed(evt);
+                 this.dispose();
+             }
          }       
     }//GEN-LAST:event_btnThemPhimActionPerformed
 
