@@ -25,8 +25,8 @@ public class QLPhimFrm extends javax.swing.JFrame {
         initComponents();
     }
     private Object[][] tableData = {};
-    final String[] collumnNames ={"ID","ten phim", "ten dien vien", "the loai", "nam san xuat", "dao dien","noi dung","quoc gia"}; 
-    DefaultTableModel tableModel = new DefaultTableModel(tableData, collumnNames){
+    final String[] columnNames ={"ID","ten phim", "ten dien vien", "the loai", "nam san xuat", "dao dien","noi dung","quoc gia"}; 
+    DefaultTableModel tableModel = new DefaultTableModel(tableData, columnNames){
         @Override
         public boolean isCellEditable(int row, int column) {
             return column != 0; //make the id column not editable
@@ -158,8 +158,8 @@ public class QLPhimFrm extends javax.swing.JFrame {
         int phimID = Integer.parseInt(phimIDStr);
         PhimDAO dao = new PhimDAO();
         dao.XoaPhim(phimID);
-        //tableModel.removeRow(index);
-       JOptionPane.showMessageDialog(null, phimID);
+        tableModel.removeRow(index);
+       //JOptionPane.showMessageDialog(null, phimID);
     }//GEN-LAST:event_btnXoaActionPerformed
 
     private void txtTimKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTimKiemActionPerformed

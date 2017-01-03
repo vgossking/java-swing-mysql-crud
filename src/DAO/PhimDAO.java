@@ -100,7 +100,7 @@ public class PhimDAO {
         List<ThongKeTheLoai> lisThongKe = new ArrayList<ThongKeTheLoai>();
         PreparedStatement ps;
         ResultSet rs;
-        String sql = "SELECT theloai, COUNT(*) AS soPhim FROM tblphim GROUP BY theloai ORDER BY soPhim DESC";
+        String sql = "SELECT theloai, COUNT(*) AS soPhim FROM tblphim GROUP BY theloai ORDER BY soPhim DESC, theLoai";
         try {
             ps =conn.prepareStatement(sql);
             rs = ps.executeQuery();

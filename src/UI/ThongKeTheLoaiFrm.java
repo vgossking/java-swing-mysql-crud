@@ -21,8 +21,8 @@ public class ThongKeTheLoaiFrm extends javax.swing.JFrame {
      * Creates new form ThongKeTheLoaiFrm
      */
     private Object[][] tableData = {};
-    final String[] collumnNames ={"The Loai", "So Phim"};
-    DefaultTableModel tableModel = new DefaultTableModel(tableData, collumnNames);
+    final String[] columnNames ={"The Loai", "So Phim"};
+    DefaultTableModel tableModel = new DefaultTableModel(tableData, columnNames);
     
     public ThongKeTheLoaiFrm() {
         initComponents();
