@@ -6,6 +6,7 @@
 package DAO;
 
 import Model.Phim;
+import Model.ThongKeTheLoai;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -93,6 +94,26 @@ public class PhimDAO {
         }
         
         return listPhim;
+    }
+    
+    public List<ThongKeTheLoai> thongKeTheLoai(){
+        List<ThongKeTheLoai> lisThongKe = new ArrayList<ThongKeTheLoai>();
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "SELECT theloai, COUNT(*) AS soPhim FROM tblphim GROUP BY theloai ORDER BY soPhim DESC";
+        try {
+            ps =conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                String theLoai = rs.getString("theloai");
+                int soPhim = rs.getInt("soPhim");
+                lisThongKe.add(new ThongKeTheLoai(theLoai, soPhim));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return lisThongKe;
     }
     /*
     Method Sua Phim

@@ -49,6 +49,7 @@ public class QLPhimFrm extends javax.swing.JFrame {
         btnTimKiem = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblResult = new javax.swing.JTable();
+        btnThongKe = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -91,6 +92,13 @@ public class QLPhimFrm extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(tblResult);
 
+        btnThongKe.setText("Thong Ke");
+        btnThongKe.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnThongKeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -106,14 +114,17 @@ public class QLPhimFrm extends javax.swing.JFrame {
                                 .addGap(54, 54, 54)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
+                                        .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(btnTimKiem))
+                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnThem)
                                         .addGap(18, 18, 18)
                                         .addComponent(btnSua)
                                         .addGap(28, 28, 28)
-                                        .addComponent(btnXoa))
-                                    .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnTimKiem)))
+                                        .addComponent(btnXoa)
+                                        .addGap(29, 29, 29)
+                                        .addComponent(btnThongKe)))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE))
                 .addContainerGap())
@@ -127,7 +138,8 @@ public class QLPhimFrm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnXoa)
                     .addComponent(btnSua)
-                    .addComponent(btnThem))
+                    .addComponent(btnThem)
+                    .addComponent(btnThongKe))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtTimKiem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -207,6 +219,11 @@ public class QLPhimFrm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnTimKiemActionPerformed
 
+    private void btnThongKeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnThongKeActionPerformed
+        // TODO add your handling code here:
+        new ThongKeTheLoaiFrm().setVisible(true);
+    }//GEN-LAST:event_btnThongKeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -245,6 +262,7 @@ public class QLPhimFrm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnSua;
     private javax.swing.JButton btnThem;
+    private javax.swing.JButton btnThongKe;
     private javax.swing.JButton btnTimKiem;
     private javax.swing.JButton btnXoa;
     private javax.swing.JLabel jLabel1;

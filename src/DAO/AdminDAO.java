@@ -18,8 +18,8 @@ import java.sql.SQLException;
 public class AdminDAO {
     DataConnect connection= new DataConnect();
     Connection conn = connection.DataConnect();
-    public static PreparedStatement ps;
-    public static ResultSet rs;
+    private static PreparedStatement ps;
+    private static ResultSet rs;
     public Admin CheckLogin(String username, String password){
         Admin ad = null;
         String sql = "SELECT * FROM tbladmin where username =? and password =?";
