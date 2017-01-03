@@ -26,6 +26,10 @@ public class ThongKeTheLoaiFrm extends javax.swing.JFrame {
     
     public ThongKeTheLoaiFrm() {
         initComponents();
+        initTableData();
+    }
+    
+    private void initTableData(){
         PhimDAO dao = new PhimDAO();
         List<ThongKeTheLoai> listThongKe = dao.thongKeTheLoai();
         tableModel.setRowCount(0);
@@ -41,7 +45,6 @@ public class ThongKeTheLoaiFrm extends javax.swing.JFrame {
             tblThongKe.setModel(tableModel);
         }       
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
