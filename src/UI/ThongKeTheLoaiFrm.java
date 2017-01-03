@@ -8,6 +8,7 @@ package UI;
 import DAO.PhimDAO;
 import Model.ThongKeTheLoai;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,14 +28,18 @@ public class ThongKeTheLoaiFrm extends javax.swing.JFrame {
         initComponents();
         PhimDAO dao = new PhimDAO();
         List<ThongKeTheLoai> listThongKe = dao.thongKeTheLoai();
-         tableModel.setRowCount(0);
-        for(int i = 0; i < listThongKe.size(); i++){          
-            ThongKeTheLoai thongKeTheLoai = listThongKe.get(i);
-            Object[] tableData = new Object[listThongKe.size()];
-            tableData = new Object[]{thongKeTheLoai.getTheLoai(), thongKeTheLoai.getSoPhim()};
-            tableModel.addRow(tableData);
-        }
-        tblThongKe.setModel(tableModel);
+        tableModel.setRowCount(0);
+        if(listThongKe.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Ko co phim trong csdl");
+        }else{
+            for (int i = 0; i < listThongKe.size(); i++) {
+                ThongKeTheLoai thongKeTheLoai = listThongKe.get(i);
+                Object[] tableData = new Object[listThongKe.size()];
+                tableData = new Object[]{thongKeTheLoai.getTheLoai(), thongKeTheLoai.getSoPhim()};
+                tableModel.addRow(tableData);
+            }
+            tblThongKe.setModel(tableModel);
+        }       
     }
 
     /**
