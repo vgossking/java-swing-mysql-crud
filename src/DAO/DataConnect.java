@@ -19,6 +19,8 @@ public class DataConnect {
     
     private static DataConnect dataConnect = new DataConnect();
     
+    private DataConnect(){}
+    
     public static DataConnect getDataConnect(){
         return dataConnect;
     }

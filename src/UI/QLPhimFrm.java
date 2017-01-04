@@ -17,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
  * @author ColaCola
  */
 public class QLPhimFrm extends javax.swing.JFrame {
-
     /**
      * Creates new form QLPhimFrm
      */

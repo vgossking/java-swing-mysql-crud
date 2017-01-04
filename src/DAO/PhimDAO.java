@@ -21,13 +21,14 @@ import java.util.logging.Logger;
  * @author vu vuong
  */
 public class PhimDAO {
-    DataConnect connection= new DataConnect();
-    Connection conn = connection.DataConnect();
+    
     
     /* Method them phim*
     @param Object Phim
     */
     public void ThemPhim(Phim phim){
+        DataConnect connection= DataConnect.getDataConnect();
+        Connection conn = connection.DataConnect();
         String sql = "INSERT INTO tblphim(tenphim,daodien,dienvien,theloai,noidung,namsanxuat, quocgia) VALUES (?,?,?,?,?,?,?)"  ;
          PreparedStatement ps;
         try {
@@ -40,6 +41,7 @@ public class PhimDAO {
             ps.setInt(6, phim.getNamSanXuat());
             ps.setString(7, phim.getCountry());
             ps.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }                
@@ -49,6 +51,8 @@ public class PhimDAO {
     @param ten phim
     */
     public boolean checkTenPhim(String tenPhim){
+        DataConnect connection= DataConnect.getDataConnect();
+        Connection conn = connection.DataConnect();
         PreparedStatement ps1;
         ResultSet rs1;
         String sql = "SELECT tenphim from tblphim where tenphim = ?";
@@ -59,6 +63,7 @@ public class PhimDAO {
             if(rs1.next()){
                 return true;
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,6 +75,8 @@ public class PhimDAO {
     Return a list of object phim
     */
     public List<Phim> timPhim(String tenPhim){
+        DataConnect connection= DataConnect.getDataConnect();
+        Connection conn = connection.DataConnect();
         PreparedStatement ps;
         ResultSet rs;
         List<Phim> listPhim = new ArrayList<Phim>();
@@ -89,6 +96,7 @@ public class PhimDAO {
                 String quocGia = rs.getString("quocGia");
                 listPhim.add(new Phim(id, ten, dienVien, theLoai, namSanXuat, daoDien, noiDung, quocGia));
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -97,6 +105,8 @@ public class PhimDAO {
     }
     
     public List<ThongKeTheLoai> thongKeTheLoai(){
+        DataConnect connection= DataConnect.getDataConnect();
+        Connection conn = connection.DataConnect();
         List<ThongKeTheLoai> lisThongKe = new ArrayList<ThongKeTheLoai>();
         PreparedStatement ps;
         ResultSet rs;
@@ -109,6 +119,7 @@ public class PhimDAO {
                 int soPhim = rs.getInt("soPhim");
                 lisThongKe.add(new ThongKeTheLoai(theLoai, soPhim));
             }
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -120,23 +131,26 @@ public class PhimDAO {
     @Param Object Phim
     */
     public void SuaPhim(Phim phim){
+        DataConnect connection = DataConnect.getDataConnect();
+        Connection conn = connection.DataConnect();
         PreparedStatement ps;
         String sql = "UPDATE tblphim SET tenphim =?, daodien =?, dienvien=?, theloai=?, noidung=?, namsanxuat=?,quocgia=? WHERE id =?";
         try {
             ps = conn.prepareStatement(sql);
-            ps.setString(1,phim.getName());
-            ps.setString(2,phim.getDirector());
-            ps.setString(3,phim.getActor());
-            ps.setString(4,phim.getGenre());
+            ps.setString(1, phim.getName());
+            ps.setString(2, phim.getDirector());
+            ps.setString(3, phim.getActor());
+            ps.setString(4, phim.getGenre());
             ps.setString(5, phim.getDescription());
-            ps.setInt(6,phim.getNamSanXuat());
-            ps.setString(7,phim.getCountry());
+            ps.setInt(6, phim.getNamSanXuat());
+            ps.setString(7, phim.getCountry());
             ps.setInt(8, phim.getId());
             ps.executeUpdate();
+            conn.close();
+
         } catch (SQLException ex) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
     }
     
     /*
@@ -144,12 +158,15 @@ public class PhimDAO {
     @param phim ID
     */
     public void XoaPhim(int ID){
+        DataConnect connection = DataConnect.getDataConnect();
+        Connection conn = connection.DataConnect();
         PreparedStatement ps;
         String sql ="DELETE FROM tblphim WHERE id = ?";
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, ID);
             ps.executeUpdate();
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(PhimDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
