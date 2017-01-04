@@ -17,6 +17,11 @@ import javax.swing.JOptionPane;
 public class DataConnect {
     private Connection conn;    
     
+    private static DataConnect dataConnect = new DataConnect();
+    
+    public static DataConnect getDataConnect(){
+        return dataConnect;
+    }
     public Connection DataConnect(){
         String dbHost = "localhost";
         String dbName = "quanlyphim";

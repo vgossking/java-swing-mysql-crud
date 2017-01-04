@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class AdminDAO {
     
     public Admin CheckLogin(String username, String password){
-        DataConnect connection = new DataConnect();
+        DataConnect connection = DataConnect.getDataConnect();
         Connection conn = connection.DataConnect();
         PreparedStatement ps;
         ResultSet rs;
@@ -44,7 +44,7 @@ public class AdminDAO {
     }
     
     public void addAdmin(Admin admin){
-        DataConnect connection = new DataConnect();
+        DataConnect connection = DataConnect.getDataConnect();
         Connection conn = connection.DataConnect();
         PreparedStatement ps;
         String sql = "INSERT INTO tbladmin(username, password, address) VALUES(?,?,?)";
@@ -55,9 +55,13 @@ public class AdminDAO {
             ps.setString(3, admin.getAddress());
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Them admin "+admin.getUsername()+" thanh cong");
+            conn.close();
         } catch (SQLException ex) {
             Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }      
+    }
+    public boolean checkUsername(Admin admin){
         
+        return false;
     }
 }
