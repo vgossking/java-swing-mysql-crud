@@ -10,17 +10,21 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author vu vuong
  */
 public class AdminDAO {
-    DataConnect connection= new DataConnect();
-    Connection conn = connection.DataConnect();
-    private static PreparedStatement ps;
-    private static ResultSet rs;
+    
     public Admin CheckLogin(String username, String password){
+        DataConnect connection = new DataConnect();
+        Connection conn = connection.DataConnect();
+        PreparedStatement ps;
+        ResultSet rs;
         Admin ad = null;
         String sql = "SELECT * FROM tbladmin where username =? and password =?";
         try {
@@ -37,5 +41,23 @@ public class AdminDAO {
            return ad = null;
         }
         return ad;
+    }
+    
+    public void addAdmin(Admin admin){
+        DataConnect connection = new DataConnect();
+        Connection conn = connection.DataConnect();
+        PreparedStatement ps;
+        String sql = "INSERT INTO tbladmin(username, password, address) VALUES(?,?,?)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, admin.getUsername());
+            ps.setString(2, admin.getPassword());
+            ps.setString(3, admin.getAddress());
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Them admin "+admin.getUsername()+" thanh cong");
+        } catch (SQLException ex) {
+            Logger.getLogger(AdminDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }
